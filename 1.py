@@ -3,17 +3,15 @@ import os, psutil
 
 
 def is_heap(arr, size_arr):
-    for i in range(size_arr//2):
-        main = arr[i]
-        child_1_index = 2*i
-        child_2_index = 2*i+1
-        if child_1_index < size_arr and child_2_index < size_arr:
-            first_child, second_child = arr[child_1_index], arr[child_2_index]
-            if first_child >= main and second_child >= main:
-                continue
-            else:
-                return False
-    return True
+    flag = False
+    for i in range(1, size_arr//2):
+        if (i*2 <= size_arr) and (arr[i] > arr[i*2]):
+            flag = True
+            break
+        if (i*2 + 1 <= size_arr) and (arr[i] > arr[i*2 + 1]):
+            flag = True
+            break
+    return flag
 
 
 t_start = time.perf_counter()
